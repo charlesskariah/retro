@@ -1,0 +1,14 @@
+%link{:href => "#{url("/custom.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/app.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.min.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.css")}", :rel => "stylesheet", :type => "text/css"}/
+.top-bar
+  .top-bar-left
+    %ul.dropdown.menu{"data-dropdown-menu" => ""}
+      %li.menu-text Retrospective
+      %li.is-active
+        %a{:href => "/peoples"} People
+      %li
+        %a{:href => "/manage"} Manage
+      %li
+        %a{:href => "/users"} All Users

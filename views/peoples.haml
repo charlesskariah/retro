@@ -1,0 +1,45 @@
+%link{:href => "#{url("/custom.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/app.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.min.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.css")}", :rel => "stylesheet", :type => "text/css"}/
+.top-bar
+  .top-bar-left
+    %ul.dropdown.menu{"data-dropdown-menu" => ""}
+      %li.menu-text Retrospective
+      %li.is-active
+        %a{:href => "/peoples"} People
+      %li
+        %a{:href => "/manage"} Manage
+      %li
+        %a{:href => "/users"} All Users
+%table.unstriped
+  %thead
+    %tr
+      %th
+        %h2 Ongoing Retrospective
+      %th
+    %tr
+      %th
+        %a.alert.button.right{ href: url("/reset") } Reset All
+      %th
+        %label
+          Sort By
+          %select
+            %option{:value => "husker"} Name(Desc)
+            %option{:value => "starbuck"} Name(Asc)
+            %option{:value => "hotdog"} Birthdate (Asc)
+            %option{:value => "apollo"} Birthdate (Asc)
+            %option{:value => "apollo"} Random
+  %tbody
+    - @names.each do |key, value|
+      -if value["status"] == "true"
+        %tr
+          %td
+            %h4
+              - if value["completed"] == 'true'
+                %strike
+                  %a{ href: url("/revoke/#{key}") }= value["name"]
+              - else
+                %a{ href: url("/completed/#{key}") }= value["name"]
+          %td
+ 

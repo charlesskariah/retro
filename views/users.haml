@@ -1,0 +1,46 @@
+%link{:href => "#{url("/custom.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/app.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.min.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.css")}", :rel => "stylesheet", :type => "text/css"}/
+.top-bar
+  .top-bar-left
+    %ul.dropdown.menu{"data-dropdown-menu" => ""}
+      %li.menu-text Retrospective
+      %li.is-active
+        %a{:href => "/peoples"} People
+      %li
+        %a{:href => "/manage"} Manage
+      %li
+        %a{:href => "/users"} All Users
+
+%table.unstriped
+  %thead
+    %tr
+      %th
+        %h2 All Users
+      %th
+      %th
+      %th
+      %th
+    %tr
+      %th Key
+      %th Name
+      %th Date of Birth
+      %th Edit
+      %th Delete
+  %tbody
+    - if @users
+      - @users.each do |key, value|
+        %tr
+          %td= key
+          %td= value["name"]
+          %td= value["dob"]
+          %td
+            %a{:href => "#"} Edit
+
+          %td
+            %a{ href: url("/delete/#{key}") } Delete
+    -else
+      %tr
+        %td No users Found
+ 

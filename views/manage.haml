@@ -1,0 +1,54 @@
+%link{:href => "#{url("/custom.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/app.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.min.css")}", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "#{url("/foundation.css")}", :rel => "stylesheet", :type => "text/css"}/
+.top-bar
+  .top-bar-left
+    %ul.dropdown.menu{"data-dropdown-menu" => ""}
+      %li.menu-text Retrospective
+      %li.is-active
+        %a{:href => "/peoples"} People
+      %li
+        %a{:href => "/manage"} Manage
+      %li
+        %a{:href => "/users"} All Users
+%table
+  %thead
+    %tr
+      %th
+        %h2 Choose People
+      %th
+  %tbody
+    - if @all_names
+      - @all_names.each do |key, value|
+        -if value["status"] == 'false'
+          %tr
+            %td= value["name"]
+            %td
+              %a.success.button.right{ href: url("/add/#{key}") } Add
+    - else
+      %tr
+        %td
+          %h3 No users found
+.callout
+  %table.unstriped
+    %thead
+      %th
+        %h2 Add New User
+    %form{:action => "/user", :method => "post"}
+      %tbody
+        %tr
+          %td
+            %label
+              Name:
+              %input{:placeholder => " Charles Skariah", :type => "text", :name => "name"}/
+        %tr
+          %td
+            %label
+              Date of Birth:
+              %input{:placeholder => "Your DOB IN DD/MM", :type => "text", :name => "dob"}/
+        %tr
+          %td
+            %input.button.success{:type => "submit"}
+
+
