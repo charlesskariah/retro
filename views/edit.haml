@@ -15,45 +15,25 @@
         %a{:href => "/manage"} Manage
       %li
         %a{:href => "/users"} All Users
-%table
+%table.unstriped
   %thead
-    %tr
-      %th
-        %h2 Choose People
-      %th
+    %th
+      %h2 Edit User
+    %form{:action => "#"}
   %tbody
-    - if @all_names
-      - @all_names.each do |key, value|
-        -if value["status"] == 'false'
-          %tr
-            %td= value["name"]
-            %td
-              %a.success.button.right{ href: url("/add/#{key}") } Add
-    - else
-      %tr
-        %td
-          %h3 No users found
-.callout
-  %table.unstriped
-    %thead
-      %th
-        %h2 Add New User
-    %form{:action => "/user", :method => "post"}
-      %tbody
-        %tr
-          %td
-            %label
-              Name:
-              %input{:placeholder => "Full Name", :type => "text", :name => "name"}/
-        %tr
-          %td
-            %label
-              Date of Birth:
-              %input#date{:type => "text", :name => "dob"}
-        %tr
-          %td
-            %input.button.success{:type => "submit"}
-
+    %tr
+      %td
+        %label
+          Name:
+          %input{:value => @user["name"], :type => "text", :name => "name"}/
+    %tr
+      %td
+        %label
+          Date of Birth:
+          %input#date{:value => @user["dob"], :type => "text", :name => "dob"}
+    %tr
+      %td
+        %input.button.success{:type => "submit"}
 
 :javascript
   $(document ).ready(function() {

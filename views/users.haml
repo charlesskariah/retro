@@ -36,10 +36,10 @@
           %td= value["name"]
           %td= value["dob"]
           %td
-            %a{:href => "#"} Edit
+            %a{ href: url("/edit/#{key}") } Edit
 
           %td
-            %a{ href: url("/delete/#{key}") } Delete
+            %a{ href: url("/delete/#{key}")} Delete
     -else
       %tr
         %td No users Found

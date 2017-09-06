@@ -25,21 +25,23 @@
         %label
           Sort By
           %select
-            %option{:value => "husker"} Name(Desc)
-            %option{:value => "starbuck"} Name(Asc)
-            %option{:value => "hotdog"} Birthdate (Asc)
-            %option{:value => "apollo"} Birthdate (Asc)
-            %option{:value => "apollo"} Random
+            %option{:value => "name_desc"} Name(Desc)
+            %option{:value => "name_asc"} Name(Asc)
+            %option{:value => "day_asc"} Birthday (Asc)
+            %option{:value => "day_desc"} Birthday (Desc)
+            %option{:value => "random"} Random
   %tbody
     - @names.each do |key, value|
       -if value["status"] == "true"
         %tr
+          - if value["completed"] == 'true'
+            %td
+              %h4
+                - if value["completed"] == 'true'
+                  %strike
+                    %a.full-width{ href: url("/revoke/#{key}") }= value["name"]
+          - else
+            %td
+              %h4
+                %a.full-width{ href: url("/completed/#{key}") }= value["name"]
           %td
-            %h4
-              - if value["completed"] == 'true'
-                %strike
-                  %a{ href: url("/revoke/#{key}") }= value["name"]
-              - else
-                %a{ href: url("/completed/#{key}") }= value["name"]
-          %td
- 

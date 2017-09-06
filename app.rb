@@ -42,9 +42,12 @@ get '/users' do
   haml :users
 end
 
-delete '/users/:id' do
-  p params[:id]
-  redirect '/users'
+get '/edit/:id' do
+  key = params[:id].to_i
+  all_users = YAML.load_file('user_list.yml')
+  @user = all_users["names"][key]
+  File.open("user_list.yml", "w") {|f| f.write(all_users.to_yaml) }
+  haml :edit
 end
 
 get '/completed/:id' do
@@ -86,4 +89,13 @@ get '/delete/:id' do
   all_users["names"].delete(key)
   File.open("user_list.yml", "w") {|f| f.write(all_users.to_yaml) }
   redirect '/users'
+end
+
+get 'update/:id' do
+  key = params[:id].to_i
+  all_users = YAML.load_file('user_list.yml')
+  all_users["names"][key]["name"] = params[:name]
+  all_users["names"][key]["dob"] = params[:dob]
+  File.open("user_list.yml", "w") {|f| f.write(all_users.to_yaml) }
+  redirect '/manage'
 end
